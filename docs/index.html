@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GodotAI Dev</title>
+  <style>
+    :root {
+      --bg:       #0d1117;
+      --surface:  #161b22;
+      --border:   #30363d;
+      --cyan:     #39d0c8;
+      --green:    #3fb950;
+      --dim:      #8b949e;
+      --text:     #e6edf3;
+      --accent:   #1f6feb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── header ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 1rem 2.5rem;
+      text-align: center;
+    }
+
+    pre.banner {
+      font-family: "Courier New", monospace;
+      font-size: clamp(6px, 1.3vw, 13px);
+      color: var(--cyan);
+      line-height: 1.2;
+      display: inline-block;
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+
+    header h1 {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--dim);
+      letter-spacing: 0.03em;
+    }
+
+    header h1 strong { color: var(--text); }
+
+    .badges {
+      margin-top: 1.2rem;
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.25rem 0.8rem;
+      font-size: 0.8rem;
+      color: var(--dim);
+    }
+
+    .badge span { color: var(--green); font-weight: 600; }
+
+    /* ── main ── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 4rem;
+    }
+
+    /* ── pills ── */
+    .pills {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      justify-content: center;
+    }
+
+    .pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.4rem;
+      flex: 1;
+      min-width: 180px;
+      max-width: 240px;
+      text-align: center;
+    }
+
+    .pill .icon { font-size: 1.6rem; margin-bottom: 0.4rem; }
+    .pill strong { display: block; color: var(--text); margin-bottom: 0.2rem; }
+    .pill p { font-size: 0.85rem; color: var(--dim); }
+
+    /* ── sections ── */
+    section { margin-bottom: 2.5rem; }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── code blocks ── */
+    pre.code {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      font-family: "Courier New", monospace;
+      font-size: 0.85rem;
+      color: var(--text);
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+
+    pre.code .comment { color: var(--dim); }
+    pre.code .cmd     { color: var(--cyan); }
+    pre.code .flag    { color: var(--green); }
+
+    /* ── commands table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    td, th {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    th { color: var(--dim); font-weight: 500; }
+
+    td:first-child {
+      font-family: "Courier New", monospace;
+      color: var(--green);
+      white-space: nowrap;
+      width: 1%;
+    }
+
+    td:last-child { color: var(--dim); }
+
+    /* ── CTA ── */
+    .cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.7rem 1.8rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin: 0.3rem;
+    }
+
+    .btn:hover { background: #388bfd; text-decoration: none; }
+
+    .btn.secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn.secondary:hover { background: var(--border); }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--dim);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <pre class="banner">
+  ██████╗  ██████╗ ██████╗  ██████╗ ████████╗     █████╗ ██╗
+ ██╔════╝ ██╔═══██╗██╔══██╗██╔═══██╗╚══██╔══╝    ██╔══██╗██║
+ ██║  ███╗██║   ██║██║  ██║██║   ██║   ██║       ███████║██║
+ ██║   ██║██║   ██║██║  ██║██║   ██║   ██║       ██╔══██║██║
+ ╚██████╔╝╚██████╔╝██████╔╝╚██████╔╝   ██║       ██║  ██║██║
+  ╚═════╝  ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝       ╚═╝  ╚═╝╚═╝</pre>
+  <h1><strong>GodotAI Dev</strong> — local AI assistant for Godot 4</h1>
+  <div class="badges">
+    <div class="badge"><span>No cloud</span></div>
+    <div class="badge"><span>No API keys</span></div>
+    <div class="badge"><span>No subscription</span></div>
+    <div class="badge">Powered by <span>Ollama</span></div>
+    <div class="badge">Python <span>3.10+</span></div>
+    <div class="badge">MIT <span>License</span></div>
+  </div>
+</header>
+
+<main>
+
+  <div class="pills">
+    <div class="pill">
+      <div class="icon">🔍</div>
+      <strong>Codebase-aware</strong>
+      <p>Indexes your .gd files with ChromaDB. Reads the files it actually needs before writing.</p>
+    </div>
+    <div class="pill">
+      <div class="icon">🔒</div>
+      <strong>100% local</strong>
+      <p>Your code never leaves your LAN. Ollama runs on your own hardware.</p>
+    </div>
+    <div class="pill">
+      <div class="icon">🛡️</div>
+      <strong>Git safety net</strong>
+      <p>Every patch is committed to a session branch. Multi-level /undo always available.</p>
+    </div>
+    <div class="pill">
+      <div class="icon">⚡</div>
+      <strong>Truncation protection</strong>
+      <p>Three layers prevent the AI from writing corrupt partial files.</p>
+    </div>
+  </div>
+
+  <section>
+    <h2>Install</h2>
+    <pre class="code"><span class="cmd">git clone</span> https://github.com/ja33man/godot-ai-dev.git
+<span class="cmd">cd</span> godot-ai-dev
+<span class="cmd">pip install</span> -r requirements.txt</pre>
+  </section>
+
+  <section>
+    <h2>Run</h2>
+    <pre class="code"><span class="comment"># Windows</span>
+<span class="cmd">python</span> godot_ai.py C:\Users\you\MyGame <span class="flag">--host</span> http://192.168.2.49:11434
+
+<span class="comment"># Mac / Linux</span>
+<span class="cmd">python3</span> godot_ai.py ~/MyGame <span class="flag">--host</span> http://192.168.2.49:11434
+
+<span class="comment"># Ollama on same machine</span>
+<span class="cmd">python3</span> godot_ai.py ~/MyGame <span class="flag">--host</span> http://localhost:11434</pre>
+  </section>
+
+  <section>
+    <h2>Models (pull on your Ollama server)</h2>
+    <pre class="code"><span class="cmd">ollama pull</span> nomic-embed-text      <span class="comment"># ~274 MB — indexes your codebase</span>
+<span class="cmd">ollama pull</span> qwen2.5-coder:14b     <span class="comment"># ~9 GB   — writes and fixes GDScript</span>
+<span class="cmd">ollama pull</span> qwen3.5:2b            <span class="comment"># ~2.7 GB — fast chat answers</span></pre>
+  </section>
+
+  <section>
+    <h2>Commands</h2>
+    <table>
+      <tr><th>Command</th><th>What it does</th></tr>
+      <tr><td>/fix</td><td>Paste a Godot error → diagnose → patch files</td></tr>
+      <tr><td>/feature</td><td>Describe a feature → generate GDScript → write files</td></tr>
+      <tr><td>/chat</td><td>Ask anything about Godot or your project</td></tr>
+      <tr><td>/run</td><td>Launch Godot here — errors trigger auto-fix offer</td></tr>
+      <tr><td>/watch</td><td>Watch Godot's log file for errors in real time</td></tr>
+      <tr><td>/retry</td><td>Re-run last command with a stricter prompt</td></tr>
+      <tr><td>/undo</td><td>Revert last AI patch via git reset</td></tr>
+      <tr><td>/models</td><td>List Ollama models and switch code/chat model</td></tr>
+      <tr><td>/help</td><td>Full command reference</td></tr>
+    </table>
+  </section>
+
+  <div class="cta">
+    <a class="btn" href="https://github.com/ja33man/godot-ai-dev">View on GitHub</a>
+    <a class="btn secondary" href="https://github.com/ja33man/godot-ai-dev/blob/master/README.md">Full docs</a>
+  </div>
+
+</main>
+
+<footer>
+  GodotAI Dev · MIT License · <a href="https://github.com/ja33man/godot-ai-dev">github.com/ja33man/godot-ai-dev</a>
+</footer>
+
+</body>
+</html>
