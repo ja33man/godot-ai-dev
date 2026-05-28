@@ -1,0 +1,10 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# GodotAI Dev — local data (index + session logs)
+# These are machine-specific and can be large; not useful to commit.
+.godot-ai-dev/
