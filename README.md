@@ -20,7 +20,7 @@ No cloud. No API keys. No subscription. Powered by [Ollama](https://ollama.com).
 Your PC / Mac                           Remote server (Linux + GPU)
 ─────────────────────────────────       ──────────────────────────
   Godot (your game)                       Ollama  ← AI models live here
-  godot_ai.py  ──── LAN ──────────→      192.168.2.49:11434
+  godot_ai.py  ──── LAN ──────────→      192.168.1.09:11434
   your .gd files
   ChromaDB index (local)
   git repo (local)
@@ -76,19 +76,19 @@ Dependencies: `ollama`, `chromadb`, `rich`, `watchdog`, `prompt_toolkit`
 
 ### Windows
 ```cmd
-python godot_ai.py C:\Users\you\Documents\MyGame --host http://192.168.2.49:11434
+python godot_ai.py C:\Users\you\Documents\MyGame --host http://192.168.1.09:11434
 ```
 
 ### Mac / Linux
 ```bash
-python3 godot_ai.py ~/Documents/MyGame --host http://192.168.2.49:11434
+python3 godot_ai.py ~/Documents/MyGame --host http://192.168.1.09:11434
 ```
 
 ### No arguments — interactive prompt
 ```
 python godot_ai.py
 📁 Godot project path: C:\Users\you\Documents\MyGame
-🖥  Ollama host [http://localhost:11434]: http://192.168.2.49:11434
+🖥  Ollama host [http://localhost:11434]: http://192.168.1.09:11434
 ```
 
 ### Other flags
